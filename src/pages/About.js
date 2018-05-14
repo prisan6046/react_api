@@ -13,7 +13,7 @@ class About extends Component{
     }
 
     componentDidMount(){
-        fetch('http://big-sh-korat.com/api/shop')
+        /*fetch('http://big-sh-korat.com/api/shop')
         .then((Response) => Response.json())
         .then((res) => {
             console.log(res.user)
@@ -21,16 +21,34 @@ class About extends Component{
                 data : res.user
             })
         })
+        */
+       fetch('http://localhost:8080/people')
+        .then((Response) => Response.json())
+        .then((res) => {
+            console.log(res)
+            this.setState({
+                data : res
+            })
+        })
     }
     renderUser(){
-        return  this.state.data.map( user =>
+        /*return  this.state.data.map( user =>
             <tr>
             <td>{user.firstname}</td>
             <td>{user.lastname}</td>
             <td>{user.email}</td>
             </tr>
+        )*/
+        return  this.state.data.map( user =>
+            <tr>
+            <td>{user.id}</td>
+            <td>{user.firstname}</td>
+            <td>{user.lastname}</td>
+           
+            </tr>
         )
     }
+    
 
     render(){
         return(
@@ -41,13 +59,14 @@ class About extends Component{
                     <table class="table">
                             <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Firstname</th>
                                 <th>Lastname</th>
-                                <th>Email</th>
+                                
                             </tr>
                             </thead>
                             <tbody>
-                              { this.renderUser()}
+                            { this.renderUser()}
                             </tbody>
                         </table>
                     </div>
